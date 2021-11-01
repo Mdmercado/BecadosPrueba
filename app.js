@@ -40,7 +40,7 @@ app.get('/api/becados', (req, res) => {
 
 //Mostrar nombre del becado por dni
 app.get('/api/becados/:dni', (req, res) => {
-  con.query("SELECT NombreApellido FROM becas.datosaspirante WHERE anio=2021 and dni=?;", [req.params.dni], function (err, result, fields) {
+  con.query("SELECT id, NombreApellido FROM becas.datosaspirante WHERE anio=2021 and dni=?;", [req.params.dni], function (err, result, fields) {
     if (err) throw err;
     res.send(result);
   });
@@ -48,13 +48,13 @@ app.get('/api/becados/:dni', (req, res) => {
 
 // insertar en bd preInscripcion
 app.post('/api/becados', (req, res) => {
-  let data = { Apelnom: req.body.Apelnom, fechaNac: req.body.fechaNac, DNI: req.body.DNI, Telefono: req.body.Telefono, sexo: req.body.sexo, anio: req.body.anio, email: req.body.email }
-  let sql = "INSERT INTO becas.preinscripcionbeca SET ?;";
+  let data = { idAspirante: req.body.idAspirante, anio: req.body.anio }
+  let sql = "INSERT INTO becas.preinscripcionbecas SET ?;";
   con.query(sql, data, function (err, result, fields) {
     if (err) {
       throw err;
     } else {
-      Object.assign(data,{id: result.insertId})
+      Object.assign(data, { id: result.insertId })
       res.send(data);
     }
 
