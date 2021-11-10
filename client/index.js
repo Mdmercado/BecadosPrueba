@@ -1,7 +1,7 @@
 
 
 
-const urlNombre = 'http://localhost:3000/api/becados';
+const urlNombre = 'https://becas-api.herokuapp.com/api/preinscriptos';
 const titulo = document.getElementById('titulo')
 const boton = document.getElementById('btnBuscar');
 const documento = document.getElementById('dni');
